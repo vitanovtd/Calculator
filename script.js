@@ -40,8 +40,12 @@ function reciprocal(a) {
   return 1 / a;
 }
 
+function plusMinus(a) {
+  return -a;
+}
+
 function backSpace(numberStr) {
-  return numberStr.slice(0, -1);
+  return numberStr.slice(0, -1) || "0";
 }
 
 function operate(operator, a, b = null) {
@@ -58,10 +62,12 @@ function operate(operator, a, b = null) {
       return percentage(a);
     case "x²":
       return square(a);
-    case "√":
+    case "2√x":
       return squareRoot(a);
     case "1/x":
       return reciprocal(a);
+    case "±":
+      return plusMinus(a);
     default:
       return null;
   }
