@@ -24,3 +24,5 @@ This project is a simple calculator built using HTML, CSS, and JavaScript. The c
 - **Advanced Operations**: Use the additional function buttons (`%`, `x²`, `2√x`, `1/x`, `±`) for more complex calculations.
 
 ## Url
+
+https://vitanovtd.github.io/Calculator/
