@@ -38,7 +38,7 @@ function squareRoot(a) {
 
 function reciprocal(a) {
   if (a === 0) {
-    return "error: division by zero";
+    return "Error: division by zero";
   }
   return 1 / a;
 }
@@ -51,7 +51,7 @@ function backspace(numberStr) {
   return numberStr.slice(0, -1) || "0";
 }
 
-function operate(operator, a, b = null) {
+function operate(operator, a, b) {
   a = parseFloat(a);
   b = parseFloat(b);
 
@@ -79,16 +79,16 @@ function operate(operator, a, b = null) {
   }
 }
 
-function updateDisplay(number) {
+function updateDisplay(content) {
   if (shouldResetDisplay) {
     resetDisplay();
   }
 
   if (display.textContent === "0" || shouldResetDisplay) {
-    display.textContent = number;
+    display.textContent = content;
     shouldResetDisplay = false;
   } else {
-    display.textContent += number;
+    display.textContent += content;
   }
 }
 
@@ -115,7 +115,7 @@ function handleBackspace() {
 }
 
 function handleOperator(operator) {
-  if (currentOperator !== null) {
+  if (currentOperator !== null && !shouldResetDisplay) {
     secondNumber = display.textContent;
     displayResult();
   }
@@ -129,10 +129,16 @@ function displayResult() {
   if (currentOperator === null || shouldResetDisplay) {
     return;
   }
-  secondNumber = display.textContent;
+
+  if (secondNumber === "") {
+    secondNumber = display.textContent;
+  }
+
   const result = operate(currentOperator, firstNumber, secondNumber);
+
   display.textContent = result;
-  firstNumber = result;
+  firstNumber = result.toString(); // Convert result back to string for further calculations
+  secondNumber = ""; // Reset second number for subsequent operations
   currentOperator = null;
   shouldResetDisplay = true;
 }
