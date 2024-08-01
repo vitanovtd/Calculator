@@ -105,6 +105,11 @@ function clearCalculator() {
   shouldResetDisplay = false;
 }
 
+function clearEntry() {
+  display.textContent = "0";
+  shouldResetDisplay = true;
+}
+
 function handleBackspace() {
   display.textContent = backspace(display.textContent);
 }
@@ -136,7 +141,6 @@ document.querySelectorAll(".button").forEach((button) => {
   button.addEventListener("click", () => {
     const { id } = button;
 
-    // Handle numeric buttons
     if (
       id === "zero" ||
       id === "one" ||
@@ -150,29 +154,21 @@ document.querySelectorAll(".button").forEach((button) => {
       id === "nine"
     ) {
       updateDisplay(button.textContent);
-    }
-    // Handle clear and backspace buttons
-    else if (id === "clear") {
+    } else if (id === "clear") {
       clearCalculator();
+    } else if (id === "clear-entry") {
+      clearEntry();
     } else if (id === "backspace") {
       handleBackspace();
-    }
-    // Handle equals button
-    else if (id === "equals") {
+    } else if (id === "equals") {
       displayResult();
-    }
-    // Handle decimal point
-    else if (id === "decimal") {
+    } else if (id === "decimal") {
       if (!display.textContent.includes(".")) {
         updateDisplay(".");
       }
-    }
-    // Handle plus-minus button
-    else if (id === "plus-minus") {
+    } else if (id === "plus-minus") {
       display.textContent = operate("±", display.textContent);
-    }
-    // Handle other operators
-    else {
+    } else {
       handleOperator(button.textContent);
     }
   });
